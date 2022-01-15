@@ -21,6 +21,8 @@ F1::l
 F2::o
 RCtrl::LCtrl
 LCtrl::MButton
+
+; 鼠标侧键 1 等于前进，连按两下等于按住 w
 XButton1::
     Send {w down}
     KeyWait, XButton1, T0.3
@@ -40,6 +42,7 @@ XButton1::
     }
 Return
 
+; 鼠标侧键 2 等于 F 键，按住等于按住 Alt 键显示鼠标
 XButton2::
     KeyWait, XButton2, T0.2
     If ErrorLevel
@@ -72,6 +75,26 @@ Return
     KeyWait, Space, T1.3
     If Not ErrorLevel
     {
+        PixelGetColor, color, 700, 1020
+        If (color == 0xD8E5EC)
+        {
+            BlockInput, MouseMove
+            MouseMove, 700, 1020
+            Click
+            BlockInput, MouseMoveOff
+            Return
+        }
+        PixelGetColor, color, 1130, 880
+        If (color == 0x66534A)
+        {
+            BlockInput, MouseMove
+            MouseGetPos, xpos, ypos
+            MouseMove, 1130, 880
+            Click
+            MouseMove, %xpos%, %ypos%
+            BlockInput, MouseMoveOff
+            Return
+        }
         Return
     }
     Loop
@@ -140,6 +163,117 @@ Return
         MouseMove, 1853, 538
         Click
         BlockInput, MouseMoveOff
+    }
+Return
+
+; 对话选项
+Selection(n) {
+    xpos := 1298
+    choices := 0
+    Loop, 8
+    {
+        ypos := 810 - 74 * choices
+        PixelGetColor, color, %xpos%, %ypos%
+        If (color != 0xFFFFFF)
+        {
+            Break
+        }
+        choices += 1
+    }
+    if (choices == 0)
+    {
+        Return False
+    }
+    ypos := 810 - 74 * choices + 74 * n
+    BlockInput, MouseMove
+    MouseMove, %xpos%, %ypos%
+    Click
+    BlockInput, MouseMoveOff
+    Return True
+}
+
+~1::
+    PixelGetColor, color, 64, 538
+    If (color == 0xD8E5EC)
+    {
+        BlockInput, MouseMove
+        MouseMove, 350, 490
+        Click
+        BlockInput, MouseMoveOff
+        Return
+    }
+    If (Selection(1))
+    {
+        Return
+    }
+Return
+
+~2::
+    PixelGetColor, color, 64, 538
+    If (color == 0xD8E5EC)
+    {
+        BlockInput, MouseMove
+        MouseMove, 760, 490
+        Click
+        BlockInput, MouseMoveOff
+        Return
+    }
+    If (Selection(2))
+    {
+        Return
+    }
+Return
+
+~3::
+    PixelGetColor, color, 64, 538
+    If (color == 0xD8E5EC)
+    {
+        BlockInput, MouseMove
+        MouseMove, 1170, 490
+        Click
+        BlockInput, MouseMoveOff
+        Return
+    }
+    If (Selection(3))
+    {
+        Return
+    }
+Return
+
+~4::
+    PixelGetColor, color, 64, 538
+    If (color == 0xD8E5EC)
+    {
+        BlockInput, MouseMove
+        MouseMove, 1590, 490
+        Click
+        BlockInput, MouseMoveOff
+        Return
+    }
+    If (Selection(4))
+    {
+        Return
+    }
+Return
+
+~5::
+    If (Selection(5))
+    {
+        Return
+    }
+Return
+
+~6::
+    If (Selection(6))
+    {
+        Return
+    }
+Return
+
+~7::
+    If (Selection(7))
+    {
+        Return
     }
 Return
 
@@ -213,18 +347,6 @@ Tab::
         BlockInput, MouseMoveOff
     }
 Return
-
-; CapsLock::
-;     BlockInput, MouseMove
-;     MouseGetPos, xpos, ypos
-;     MouseMove, 960, 540
-;     Click
-;     MouseMove, 1650, 1000
-;     MouseMove, 1200, 760
-;     Click
-;     MouseMove, %xpos%, %ypos%
-;     BlockInput, MouseMoveOff
-; Return
 
 ; 5个探索派遣
 Expedition(x1, y1, x2, y2, x3, y3) {
