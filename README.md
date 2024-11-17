@@ -35,13 +35,13 @@ Tab 键用来点右下角的按钮，这样就不用鼠标去找位置点了。
 
 ## 使用方法
 
-到 [AutoHotkey 官网](https://www.autohotkey.com/) 下载 AutoHotkey。正常进行安装。（注意：使用 Download Current Version，而不是 Download V2 Alpha。）
+到 [AutoHotkey 官网](https://www.autohotkey.com/) 点击 Download v2.0 下载 AutoHotkey。正常进行安装。
 
 下载本仓库，解压。然后双击运行 `原神.ahk` 就可以了。
 
 ## 免责声明
 
-我自己从开服到现在一直在正常使用，没有被封号，但这不代表以后不会被封号。
+我自己从开服到现在（2022 年 1 月）一直在正常使用，没有被封号，但这不代表以后不会被封号。
 
 你可以随意免费地使用、修改、传播本工具，但是如果造成封号或其他问题，本工具作者不承担任何责任。
 
